@@ -10,3 +10,4 @@ psycopg2 = { version = "*", sys_platform = "== 'win32'" }
 psycopg2-binary = { version = "*", sys_platform = "!= 'win32'" }
 graphene-django = "*"
 django-graphql-jwt = "*"
+django-cors-headers = "*"

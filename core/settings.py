@@ -48,6 +48,7 @@ DJANGO_APPS = [
 
 # Third Party apps
 THIRD_PARTY_APPS = [
+    "corsheaders",
     "graphene_django",
     "graphql_jwt.refresh_token.apps.RefreshTokenConfig",
 ]
@@ -55,11 +56,8 @@ THIRD_PARTY_APPS = [
 # local django apps
 LOCAL_APPS = []
 
-# Application definition
-
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-
-MIDDLEWARE = [
+# Django built-in middleware
+DJANGO_MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -68,6 +66,18 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# Third Party middleware
+THIRD_PARTY_MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+]
+
+# Application definition
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+# Django built-in apps
+MIDDLEWARE = DJANGO_MIDDLEWARE + THIRD_PARTY_MIDDLEWARE
 
 ROOT_URLCONF = "core.urls"
 
@@ -126,11 +136,15 @@ GRAPHQL_JWT = {
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
     "JWT_EXPIRATION_DELTA": timedelta(seconds=5),
     "JWT_REFRESH_EXPIRATION_DELTA": timedelta(minutes=5),
-
     # Cookie authentication
     "JWT_COOKIE_NAME": "access",
     "JWT_REFRESH_TOKEN_COOKIE_NAME": "refresh",
 }
+
+# CORS settings
+# CORS_ALLOWED_ORIGINS = []
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Password validation
 
