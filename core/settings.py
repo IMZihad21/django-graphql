@@ -54,7 +54,7 @@ THIRD_PARTY_APPS = [
 ]
 
 # local django apps
-LOCAL_APPS = []
+LOCAL_APPS = ["blog.apps.BlogConfig"]
 
 # Django built-in middleware
 DJANGO_MIDDLEWARE = [
@@ -123,7 +123,7 @@ else:
 # GRAPHENE definition
 
 GRAPHENE = {
-    "SCHEMA": "core.schema.schema",
+    "SCHEMA": "core.schema.RootSchema",
     "MIDDLEWARE": [
         "graphql_jwt.middleware.JSONWebTokenMiddleware",
     ],
