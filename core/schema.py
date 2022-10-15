@@ -1,6 +1,6 @@
-import blog.schema as Blog
 import graphene
 import graphql_jwt
+from blog.schema import BlogMutation, BlogQuery
 from django.contrib.auth.models import User
 from graphene_django import DjangoObjectType
 from graphql_jwt.decorators import login_required
@@ -30,11 +30,11 @@ class AuthMutation(graphene.ObjectType):
 
 
 # Root Schema Definitions
-class Query(AuthQuery, Blog.Query, graphene.ObjectType):
+class Query(AuthQuery, BlogQuery, graphene.ObjectType):
     pass
 
 
-class Mutation(AuthMutation, graphene.ObjectType):
+class Mutation(AuthMutation, BlogMutation, graphene.ObjectType):
     pass
 
 

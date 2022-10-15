@@ -1,22 +1,15 @@
 import graphene
-from graphene_django import DjangoListField, DjangoObjectType
+from graphene_django import DjangoListField
+from graphene_django.forms.mutation import DjangoModelFormMutation
 from graphql_jwt.decorators import login_required
 
+from blog.forms import PostForm
 from blog.models import Post
+from blog.types import PostType
 
 
-class PostType(DjangoObjectType):
-    class Meta:
-        model = Post
-
-    @classmethod
-    def get_queryset(cls, queryset, info):
-        if info.context.user.is_anonymous:
-            return queryset.filter(is_active=True)
-        return queryset
-
-
-class Query(graphene.ObjectType):
+# Query
+class BlogQuery(graphene.ObjectType):
     blog = graphene.Field(PostType, id=graphene.ID())
     all_blogs = DjangoListField(PostType)
     own_blogs = DjangoListField(PostType)
@@ -30,3 +23,24 @@ class Query(graphene.ObjectType):
     @login_required
     def resolve_own_blogs(self, info, **kwargs):
         return Post.objects.filter(id=info.context.user.id)
+
+
+# Mutation
+
+
+class CreateBlog(DjangoModelFormMutation):
+    blog = graphene.Field(PostType)
+
+    class Meta:
+        form_class = PostForm
+        return_field_name = "blog"
+
+    @classmethod
+    @login_required
+    def perform_mutate(cls, form, info):
+        form.instance.author = info.context.user
+        return super().perform_mutate(form, info)
+
+
+class BlogMutation(graphene.ObjectType):
+    create_blog = CreateBlog.Field()
