@@ -54,7 +54,7 @@ THIRD_PARTY_APPS = [
 ]
 
 # local django apps
-LOCAL_APPS = ["blog.apps.BlogConfig"]
+LOCAL_APPS = ["blog.apps.BlogConfig", "users.apps.UsersConfig"]
 
 # Django built-in middleware
 DJANGO_MIDDLEWARE = [
@@ -161,6 +161,8 @@ AUTHENTICATION_BACKENDS = [
     "graphql_jwt.backends.JSONWebTokenBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
+
+AUTH_USER_MODEL = "users.User"
 
 # Internationalization
 
