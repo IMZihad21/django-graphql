@@ -1,12 +1,12 @@
 import graphene
 import graphql_jwt
-from django.contrib.auth import get_user_model
 from graphql import GraphQLError
-from graphql_jwt.decorators import login_required, staff_member_required
+from graphql_jwt.decorators import login_required
 
+from users.models import User
+from users.mutations import SignUp
 from users.types import UserType
 
-User = get_user_model()
 
 # Auth Definitions
 class AuthQuery(graphene.ObjectType):
@@ -25,7 +25,12 @@ class AuthQuery(graphene.ObjectType):
             raise GraphQLError(f"No user not found with id {user_id}!") from e
 
 
+# Mutations
+
+
 class AuthMutation(graphene.ObjectType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
     refresh_token = graphql_jwt.Refresh.Field()
     revoke_token = graphql_jwt.Revoke.Field()
+
+    signup = SignUp.Field()
