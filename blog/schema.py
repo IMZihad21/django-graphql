@@ -10,12 +10,12 @@ from blog.types import PostType
 
 # Query
 class BlogQuery(graphene.ObjectType):
-    blog = graphene.Field(PostType, id=graphene.ID())
+    blog = graphene.Field(PostType, slug=graphene.String())
     all_blogs = DjangoListField(PostType)
     own_blogs = DjangoListField(PostType)
 
-    def resolve_blog(self, info, id):
-        return Post.objects.get(id=id)
+    def resolve_blog(self, info, slug):
+        return Post.objects.get(slug=slug)
 
     def resolve_all_blogs(self, info, **kwargs):
         return Post.objects.all()
