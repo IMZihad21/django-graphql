@@ -8,7 +8,7 @@ from users.forms import SignupForm
 from users.types import UserType
 
 
-class SignUp(ObtainJSONWebTokenMixin, DjangoMutationForm):
+class SignUpMutation(ObtainJSONWebTokenMixin, DjangoMutationForm):
     class Meta:
         form_class = SignupForm
 
@@ -19,7 +19,7 @@ class SignUp(ObtainJSONWebTokenMixin, DjangoMutationForm):
         form.save()
         kwargs = {
             "password": form.data["password1"],
-            get_user_model().USERNAME_FIELD: form.data["email"],
+            get_user_model().USERNAME_FIELD: form.data[get_user_model().USERNAME_FIELD],
         }
         return cls.authorize_user(root, info, **kwargs)
 

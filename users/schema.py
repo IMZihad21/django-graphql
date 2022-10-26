@@ -4,7 +4,7 @@ from graphql import GraphQLError
 from graphql_jwt.decorators import login_required
 
 from users.models import User
-from users.mutations import SignUp
+from users.mutations import SignUpMutation
 from users.types import UserType
 
 
@@ -33,4 +33,4 @@ class AuthMutation(graphene.ObjectType):
     refresh_token = graphql_jwt.Refresh.Field()
     revoke_token = graphql_jwt.Revoke.Field()
 
-    signup = SignUp.Field()
+    signup = SignUpMutation.Field()
