@@ -1,7 +1,7 @@
 import graphene
 from graphene_django import DjangoListField
-from graphene_django.forms.mutation import DjangoModelFormMutation
 from graphql_jwt.decorators import login_required
+from utils.mutations import DjangoMutationForm
 
 from blog.forms import PostForm
 from blog.models import Post
@@ -28,7 +28,7 @@ class BlogQuery(graphene.ObjectType):
 # Mutation
 
 
-class CreateBlog(DjangoModelFormMutation):
+class CreateBlog(DjangoMutationForm):
     blog = graphene.Field(PostType)
 
     class Meta:
