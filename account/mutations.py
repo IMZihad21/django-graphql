@@ -2,13 +2,13 @@ import graphene
 from django.contrib.auth import get_user_model
 from graphql_jwt.decorators import token_auth
 from graphql_jwt.mixins import ObtainJSONWebTokenMixin
-from utils.mutations import DjangoMutationForm
+from utils.mutations import FormMutation
 
-from users.forms import SignupForm
-from users.types import UserType
+from account.forms import SignupForm
+from account.types import UserType
 
 
-class SignUpMutation(ObtainJSONWebTokenMixin, DjangoMutationForm):
+class SignUpMutation(ObtainJSONWebTokenMixin, FormMutation):
     class Meta:
         form_class = SignupForm
 

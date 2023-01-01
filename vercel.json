@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "core/asgi.py",
+      "src": "core/wsgi.py",
       "use": "@vercel/python"
     },
     {
@@ -16,7 +16,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "core/asgi.py"
+      "dest": "core/wsgi.py"
     }
   ],
   "env": {

@@ -2,7 +2,7 @@ from graphene_django.forms.mutation import DjangoModelFormMutation
 from graphql import GraphQLError
 
 
-class DjangoMutationForm(DjangoModelFormMutation):
+class FormMutation(DjangoModelFormMutation):
     class Meta:
         abstract = True
 
