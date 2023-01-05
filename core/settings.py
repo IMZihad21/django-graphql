@@ -142,7 +142,7 @@ GRAPHQL_JWT = {
     "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=7),
     # Cookie authentication
     "JWT_HIDE_TOKEN_FIELDS": True,
-    "JWT_COOKIE_SECURE": True,
+    # "JWT_COOKIE_SECURE": True,
     "JWT_COOKIE_SAMESITE": "Lax",
     "JWT_COOKIE_NAME": "__jwt",
 }
